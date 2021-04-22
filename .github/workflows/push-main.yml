@@ -33,30 +33,30 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push app image to Amazon ECR
-        id: build-app
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ecr-mastodon
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t mastodon ./mastodon/
-          docker tag mastodon:latest $ECR_REGISTRY/$ECR_REPOSITORY:mastodon_latest
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mastodon_latest
+#      - name: Build, tag, and push app image to Amazon ECR
+#        id: build-app
+#        env:
+#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#          ECR_REPOSITORY: ecr-mastodon
+#          IMAGE_TAG: ${{ github.sha }}
+#        run: |
+#          docker build -t mastodon ./mastodon/
+#          docker tag mastodon:latest $ECR_REGISTRY/$ECR_REPOSITORY:mastodon_latest
+#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:mastodon_latest
 
-      - name: ecs run tsk for db:create
-        id: db-create
-        run: |
-          aws ecs run-task --cluster cluster-mastodon  --task-definition rails_task_def \
-          --overrides '{"containerOverrides": [{"name":"web", "command": ["rails","db:create"]}]}' \
-          --launch-type FARGATE \
-          --network-configuration 'awsvpcConfiguration={subnets=[subnet-06528b45fc58aa79a,subnet-0e0912b634f2f5365],securityGroups=[sg-0a5baf525922c9b44],assignPublicIp=DISABLED}'
+#      - name: ecs run tsk for db:create
+#        id: db-create
+#        run: |
+#          aws ecs run-task --cluster cluster-mastodon  --task-definition rails_task_def \
+#          --overrides '{"containerOverrides": [{"name":"web", "command": ["rails","db:create"]}]}' \
+#          --launch-type FARGATE \
+#          --network-configuration 'awsvpcConfiguration={subnets=[subnet-06528b45fc58aa79a,subnet-0e0912b634f2f5365],securityGroups=[sg-0a5baf525922c9b44],assignPublicIp=DISABLED}'
 
       - name: ecs run tsk for db:migrate
         id: db-migrate
         run: |
           aws ecs run-task --cluster cluster-mastodon  --task-definition rails_task_def \
-          --overrides '{"containerOverrides": [{"name":"web", "command": ["rails","db:migrate"]}]}' \
+          --overrides '{"containerOverrides": [{"name":"web", "command": ["rails","db:setup"]}]}' \
           --launch-type FARGATE \
           --network-configuration 'awsvpcConfiguration={subnets=[subnet-06528b45fc58aa79a,subnet-0e0912b634f2f5365],securityGroups=[sg-0a5baf525922c9b44],assignPublicIp=DISABLED}'
 
