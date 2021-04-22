@@ -20,6 +20,7 @@ jobs:
           repository: takaheraw/mastodon
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: mastodon
+          ref: production_deploy
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
