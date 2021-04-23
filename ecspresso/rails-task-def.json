@@ -1,0 +1,113 @@
+{
+  "containerDefinitions": [
+    {
+      "command": [
+        "bundle",
+        "exec",
+        "rails",
+        "s",
+        "-p",
+        "3000"
+      ],
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "LOCAL_DOMAIN",
+          "value": "localhost:3000"
+        },
+        {
+          "name": "REDIS_HOST",
+          "value": "mastodon.waqlpw.ng.0001.apne1.cache.amazonaws.com"
+        },
+        {
+          "name": "RAILS_ENV",
+          "value": "production"
+        },
+        {
+          "name": "DB_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "DB_USER",
+          "value": "postgres"
+        },
+        {
+          "name": "DB_NAME",
+          "value": "mastodon_production"
+        },
+        {
+          "name": "VAPID_PRIVATE_KEY",
+          "value": "CfqFXyX_ohTyoP--Ar88vdHJ5kr3AUq20Ca27BOVv_0="
+        },
+        {
+          "name": "DB_HOST",
+          "value": "mastodon.chcbyiaszqza.ap-northeast-1.rds.amazonaws.com"
+        },
+        {
+          "name": "LOCAL_HTTPS",
+          "value": "false"
+        },
+        {
+          "name": "REDIS_PORT",
+          "value": "6379"
+        },
+        {
+          "name": "DB_PASS",
+          "value": "postgres"
+        },
+        {
+          "name": "ES_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "VAPID_PUBLIC_KEY",
+          "value": "BJf5VpxH19kqm3n3rAe9D5_yIrgxFNUh4btETnuIuEkfjd_3TzqvI8HdAeL4nTHo1NFwA0z95G205dN6mRtD-ik="
+        },
+        {
+          "name": "SINGLE_USER_MODE",
+          "value": "true"
+        },
+        {
+          "name": "OTP_SECRET",
+          "value": "51f3d6610319d4a838b0d404ee7bb7430c621479354d0d99240b404ac6e8270a9a80ff75d2c72a2ac1a94bfc462a3d6870dd00d80a5678b2de4d333f85501f0a"
+        },
+        {
+          "name": "SECRET_KEY_BASE",
+          "value": "ed48a16677deea7796e980bb243fa3bb8c38f82240e2ee499cfdb6d39a457d3e636470ffa5df8bdc5f2cda1582e44fa0f533d387f0718906029d964218983699"
+        }
+      ],
+      "essential": true,
+      "image": "048225877211.dkr.ecr.ap-northeast-1.amazonaws.com/ecr-mastodon:mastodon_latest",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/rails_task_def",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "mountPoints": [],
+      "name": "web",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "volumesFrom": []
+    }
+  ],
+  "cpu": "1024",
+  "executionRoleArn": "arn:aws:iam::048225877211:role/ecsTaskExecutionRole",
+  "family": "rails_task_def",
+  "memory": "2048",
+  "networkMode": "awsvpc",
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "tags": [],
+  "taskRoleArn": "arn:aws:iam::048225877211:role/ecsTaskRole",
+  "volumes": []
+}

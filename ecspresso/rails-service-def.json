@@ -1,0 +1,40 @@
+{
+  "deploymentConfiguration": {
+    "deploymentCircuitBreaker": {
+      "enable": false,
+      "rollback": false
+    },
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 100
+  },
+  "desiredCount": 1,
+  "enableECSManagedTags": true,
+  "enableExecuteCommand": false,
+  "healthCheckGracePeriodSeconds": 0,
+  "launchType": "FARGATE",
+  "loadBalancers": [
+    {
+      "containerName": "web",
+      "containerPort": 3000,
+      "targetGroupArn": "arn:aws:elasticloadbalancing:ap-northeast-1:048225877211:targetgroup/fargate-deploy-tg/373b32e244081e49"
+    }
+  ],
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "assignPublicIp": "DISABLED",
+      "securityGroups": [
+        "sg-0a5baf525922c9b44"
+      ],
+      "subnets": [
+        "subnet-06528b45fc58aa79a",
+        "subnet-0e0912b634f2f5365"
+      ]
+    }
+  },
+  "placementConstraints": [],
+  "placementStrategy": [],
+  "platformVersion": "LATEST",
+  "schedulingStrategy": "REPLICA",
+  "serviceRegistries": [],
+  "tags": []
+}

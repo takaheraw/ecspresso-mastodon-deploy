@@ -59,7 +59,7 @@
           },
           {
             "name": "LOCAL_DOMAIN",
-            "value": "localhost:300"
+            "value": "localhost:3000"
           },
           {
             "name": "LOCAL_HTTPS",
@@ -136,7 +136,7 @@
       "EC2",
       "FARGATE"
     ],
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:048225877211:task-definition/rails_task_def:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:048225877211:task-definition/rails_task_def:5",
     "family": "rails_task_def",
     "requiresAttributes": [
       {
