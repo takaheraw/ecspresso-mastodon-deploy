@@ -98,7 +98,12 @@
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "tags": [],
+  "tags": [
+    {
+      "key": "Name",
+      "value": "sidekiq"
+    }
+  ],
   "taskRoleArn": "arn:aws:iam::048225877211:role/ecsTaskRole",
   "volumes": []
 }
